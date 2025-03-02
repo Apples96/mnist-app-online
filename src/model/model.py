@@ -39,6 +39,5 @@ class MNISTModel(nn.Module):
         # Output layer
         x = self.fc2(x)
         
-        # Return log softmax
-        output = F.log_softmax(x, dim=1)
+        output = x
         return output

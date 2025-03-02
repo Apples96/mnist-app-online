@@ -7,8 +7,11 @@ from PIL import Image
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
-load_dotenv()
+# Get the project root directory
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Load the .env file from the project root
+load_dotenv(os.path.join(project_root, '.env'))
 
 def get_db_connection():
     """Create a database connection"""

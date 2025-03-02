@@ -4,8 +4,15 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 import numpy as np
-from src.model.model import MNISTModel
-from src.db.database import get_prediction_stats, get_prediction_history, log_prediction, update_true_label
+from dotenv import load_dotenv
+import sys
+import os
+
+# Add path to recognize project structure
+# This assumes you're running app.py from the web directory
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from model.model import MNISTModel
+from db.database import get_prediction_stats, get_prediction_history, log_prediction, update_true_label
 import uuid
 
 # Initialize the model
@@ -28,11 +35,8 @@ def predict_digit(canvas_image):
         img = img.resize((28, 28))
         # Convert to numpy array and then a tensor
         img_array = np.array(img)
-        # MNIST has white digits on black background, so invert colors if needed
-        # If your drawing is black on white, you need this inversion
-        img_array = 255 - img_array
         # Show the processed image for debugging
-        st.image(img_array, caption="Processed Image (After Inversion)", width=100)
+        st.image(img_array, caption="Processed Image (MNIST Format)", width=100)
        
         # Normalize using the same values from training
         img_tensor = torch.FloatTensor(img_array).unsqueeze(0).unsqueeze(0) / 255.0
@@ -89,10 +93,10 @@ def main():
 
     # Create a drawable canvas component
     canvas_result = st_canvas(
-        fill_color="rgba(255, 255, 255, 1)",  # White background
+        fill_color="rgba(0, 0, 0, 1)",  # Black background
         stroke_width=20,
-        stroke_color="#000000",
-        background_color="#FFFFFF",
+        stroke_color="#FFFFFF",
+        background_color="#000000",
         height=280,
         width=280,
         drawing_mode="freedraw",
