@@ -2,7 +2,7 @@
 
 A full-stack web application that allows users to draw digits which are then classified using a PyTorch deep learning model. The application is containerized with Docker and includes a PostgreSQL database for logging predictions.
 
-## [Live Demo](http://188.245.253.11:8501/)
+## [Live Demo](http://116.203.84.222:8501/)
 
 ## Project Overview
 
